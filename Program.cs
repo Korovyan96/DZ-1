@@ -1,122 +1,73 @@
-﻿void Zadacha54()
+//Задача 64
+Console.WriteLine("Задача 64");
+int n = InputNumbers("Введите n: ");
+int count = 2;
+PrintNumber(n, count);
+Console.Write(1);
+
+void PrintNumber(int n, int count)
 {
-    Console.WriteLine("Задача № 54 ");
-    Console.WriteLine("Введите количество строк ");
-    int n = Convert.ToInt32(Console.ReadLine());
-    Console.WriteLine("Введите количество столбцов ");
-    int m = Convert.ToInt32(Console.ReadLine());
-    Random ran = new Random();
-    int[,] num = new int[n, m];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            num[i, j] = ran.Next(0,20);
-        }
-    }
-    PrintArray(num);
-    Sort(num);
-    PrintArray(num);
+  if (count > n) return;
+  PrintNumber(n, count + 1);
+  Console.Write(count + ", ");
 }
 
-void PrintArray(int [,]num)
+int InputNumbers(string input) 
 {
- for (int i = 0; i < num.GetLength(0); i++)
-    {
-        for (int j = 0; j < num.GetLength(1); j++)
-            Console.Write(num[i, j] + "\t");
-        Console.WriteLine();
-    }
-}
-void Sort(int[,]num)
-{
-    for (int i = 0; i < num.GetLength(0); i++)
-    {
-        for (int j = 0; j < num.GetLength(1)-1; j++)
-             {
-               for (int b = 0; b < num.GetLength(1)-1; b++)
-                {
-                    if ((num[i,b] < num[i,b+1])) 
-                         { int t=0;
-                           t = num[i,b];
-                           num[i,b] = num[i,b+1];
-                           num[i,b+1] = t;
-                         }
-                 }
-                }
-            }
-            Console.WriteLine();
-            Console.WriteLine("Массив с упорядоченными значениями");
-            }
-    
- 
-void Zadacha56()
-{
-    Console.WriteLine("Задача № 56 ");
-    int n = 3;
-    int m = 4;
-    int[,] num = new int[n, m];
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            num[i, j] = new Random().Next(-10, 10);
-        }
-    }
-    PrintArray(num);
-    Poisk(num);
-}
-
-void Poisk(int[,]num)
-{
-int minsum = 0;
-int index = 0;
-
-for (int i = 0; i < num.GetLength(0); i++)
-{
-    int sum = 0;
-    for (int j = 0; j < num.GetLength(1); j++)
-    {
-        sum = sum + num[i, j];        
-    }
-    if (sum < minsum)
-    {
-        minsum = sum;
-        index++;
-    }
-}
-
-Console.WriteLine("Cтрока с наименьшей суммой элементов под номером: " + (index) + ", с суммой элементов равной: " + (minsum));
+  Console.Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
 }
 
 
-void Zadacha58()
-{
-    Console.WriteLine("Задача № 58 ");
-    Console.WriteLine("Введите размер массива");
-int size = Convert.ToInt32(Console.ReadLine());
-int[,] num = new int[size, size];
-int n = 1;
-int i = 0;
-int j = 0;
 
-while (n <= size * size)
+//Задача 66
+Console.WriteLine($"Задача 66 ");
+int m = InputNumbers("Введите m: ");
+int n = InputNumbers("Введите n: ");
+int t = m;
+if (m > n) 
 {
-    num[i, j] = n;
-    if (i <= j + 1 && i + j < size - 1)
-        ++j;
-    else if (i < j && i + j >= size - 1)
-        ++i;
-    else if (i >= j && i + j > size - 1)
-        --j;
-    else
-        --i;
-    ++n;
+  m = n; 
+  n = t;
 }
-PrintArray(num);
+PrintSum(m, n, t=0);
+
+void PrintSum(int m, int n, int sum)
+{
+  sum = sum + n;
+  if (n <= m)
+  {
+    Console.Write($"Сумма элементов = {sum} ");
+    return;
+  }
+  PrintSum(m, n - 1, sum);
 }
 
-Zadacha54();
-Zadacha56();
-Zadacha58();
+int InputNumbers(string input) 
+{
+  Console.Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
+}
 
+//Задача 68
+Console.WriteLine("Задача 68 ");
+int m = InputNumbers("Введите m: ");
+int n = InputNumbers("Введите n: ");
+int Akkerman = A(m, n);
+Console.Write($"Функция Аккермана = {Akkerman} ");
+
+int A(int m, int n)
+{
+  if (m == 0) return n + 1;
+  else if (n == 0) return A(m - 1, 1);
+  else return A(m - 1, A(m, n - 1));
+}
+
+int InputNumbers(string input) 
+{
+  Console.Write(input);
+  int output = Convert.ToInt32(Console.ReadLine());
+  return output;
+}
